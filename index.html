@@ -23,13 +23,12 @@
             width: 90%;
             max-width: 600px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 25px 25px 50px 25px; /* Alttaki imza için bırakılan boşluk */
             border: 3px solid #ff0000;
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
             position: relative;
-            padding-bottom: 50px;
         }
 
         h1 {
@@ -37,7 +36,7 @@
             text-shadow: 2px 2px 5px #000;
         }
 
-        /* Korkutucu ve ışıklandırmalı/parlayan buton tasarımı */
+        /* Korkutucu ve parlayan butonlar */
         button {
             background-color: #990000;
             color: white;
@@ -55,12 +54,12 @@
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 8px rgba(255, 0, 0, 0.4); }
-            100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.9), inset 0 0 5px rgba(255, 50, 50, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.9); }
         }
 
         button:hover {
             background-color: #ff1a1a;
-            box-shadow: 0 0 25px #ff0000, 0 0 10px #fff;
+            box-shadow: 0 0 25px #ff0000;
             transform: scale(1.03);
         }
 
@@ -72,10 +71,9 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        /* Korkutucu Şık Butonları */
         .option-btn {
             background-color: #2b0000;
             border: 2px solid #ff1a1a;
@@ -87,18 +85,20 @@
             border-radius: 5px;
             transition: 0.2s;
             box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+            animation: none;
         }
 
         .option-btn:hover {
             background-color: #660000;
             border-color: #ff6666;
             box-shadow: 0 0 15px #ff0000;
+            transform: none;
         }
 
-        /* En altta sabit Bay Ali Ferhan imzası */
+        /* En altta sabit Bay Ali Ferhan imzası ve GitHub bağlantısı */
         #creator-footer {
             position: absolute;
-            bottom: 10px;
+            bottom: 8px;
             left: 0;
             width: 100%;
             text-align: center;
@@ -147,6 +147,7 @@
 </head>
 <body>
 
+    <!-- ANA MENÜ -->
     <div class="container" id="main-menu">
         <h1>FIVE NIGHTS AT FREDDY'S</h1>
         <p>Geceden sağ çıkabilecek misin, yoksa pizzacıda rozbif mi olacaksın?</p>
@@ -159,6 +160,7 @@
         </div>
     </div>
 
+    <!-- NASIL OYNANIR -->
     <div class="container hidden" id="how-to-play-screen">
         <h2>Nasıl Oynanır?</h2>
         <p>Karşına Freddy ve dostlarıyla ilgili 20 soru çıkacak. Yanlış bilirsen ekran şiddetle sallanacak ve korkunç bir jumpscare ses dalgası patlayacak! Dikkatli ol!</p>
@@ -170,14 +172,15 @@
         </div>
     </div>
 
+    <!-- OYUN / SORU EKRANI -->
     <div class="container hidden" id="game-screen">
-        <!-- Soru ekranının en üstüne eklenen Geri Dön Tuşu -->
-        <div style="text-align: left; margin-bottom: 15px;">
-            <button onclick="playClickSound(); backToMenu();" style="font-size: 13px; padding: 6px 15px; margin: 0;">◀ Geri Dön</button>
+        <!-- En üstteki Geri Dön Tuşu -->
+        <div style="text-align: left; margin-bottom: 10px;">
+            <button onclick="playClickSound(); backToMenu();" style="font-size: 13px; padding: 6px 15px; margin: 0; animation: none;">◀ Geri Dön</button>
         </div>
 
         <h3 id="question-number">Soru 1 / 20</h3>
-        <p id="question-text" style="font-size: 18px; min-height: 60px;"></p>
+        <p id="question-text" style="font-size: 18px; min-height: 50px;"></p>
         <div class="options-container" id="options-container"></div>
 
         <div id="creator-footer">
@@ -185,20 +188,21 @@
         </div>
     </div>
 
-    <!-- Yanlış Cevap Jumpscare Ses & Ekran Sallanma Alanı -->
+    <!-- JUMPSCARE EKRANI -->
     <div class="hidden overlay-screen shake" id="jumpscare-screen" style="background: #300;">
         <h1 style="color:red; font-size: 60px; text-shadow: 0 0 20px red; letter-spacing: 3px;">JUMPSCARE! 😱</h1>
         <p style="margin-top: 15px; font-size: 24px; color: #ff9999;">Yanlış cevap! Odaya karanlık çöktü!</p>
         <button onclick="playClickSound(); resumeGame();" style="margin-top:25px; background-color: #ff0000; border-color: #fff;">Devam Et</button>
     </div>
 
-    <!-- Doğru Cevap Ekranı -->
+    <!-- DOĞRU CEVAP EKRANI -->
     <div class="hidden overlay-screen" id="correct-screen" style="background: rgba(0,20,0,0.95);">
         <h1 style="color:#00ff00; font-size: 45px; text-shadow: 0 0 15px green;">DOĞRU BİLDİN! 🎉</h1>
         <p style="margin-top: 15px; font-size: 22px; color: #aaffaa;">Harika gidiyorsun, güvendesin!</p>
         <button onclick="playClickSound(); nextQuestionAfterCorrect();" style="margin-top:20px; background-color: #008000; border-color: #00ff00;">Sıradaki Soru</button>
     </div>
 
+    <!-- OYUN BİTTİ EKRANI -->
     <div class="container hidden" id="result-screen">
         <h1 id="result-title">VAY BE, BAŞARDIN! 🎉</h1>
         <p id="result-text"></p>
@@ -235,10 +239,9 @@
 
         let currentQuestionIndex = 0;
 
-        // Web Audio API ile Tarayıcı İçi Ses Sentezleyicisi
+        // Web Audio API Ses Motoru
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Butona tıklandığında çıkan tok/mekanik ses
         function playClickSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             let osc = audioCtx.createOscillator();
@@ -257,7 +260,6 @@
             osc.stop(audioCtx.currentTime + 0.08);
         }
 
-        // Yanlış cevapta patlayan korkunç jumpscare ses dalgası
         function playJumpscareSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             let osc = audioCtx.createOscillator();
@@ -266,7 +268,6 @@
             gain.connect(audioCtx.destination);
 
             osc.type = 'sawtooth';
-            // Korkutucu kalın ve tiz dalgalı frekans değişimi
             osc.frequency.setValueAtTime(120, audioCtx.currentTime);
             osc.frequency.setValueAtTime(800, audioCtx.currentTime + 0.1);
             osc.frequency.setValueAtTime(200, audioCtx.currentTime + 0.2);
@@ -335,7 +336,6 @@
             if (selectedIndex === correctIndex) {
                 document.getElementById('correct-screen').classList.remove('hidden');
             } else {
-                // Jumpscare ekranını aç ve korkunç ses dalgasını çal
                 document.getElementById('jumpscare-screen').classList.remove('hidden');
                 playJumpscareSound();
             }
