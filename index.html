@@ -24,7 +24,7 @@
             max-width: 600px;
             text-align: center;
             background: rgba(0, 0, 0, 0.9);
-            padding: 25px 25px 50px 25px; /* Alttaki imza için bırakılan boşluk */
+            padding: 25px 25px 55px 25px;
             border: 3px solid #ff0000;
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
@@ -36,7 +36,6 @@
             text-shadow: 2px 2px 5px #000;
         }
 
-        /* Korkutucu ve parlayan butonlar */
         button {
             background-color: #990000;
             color: white;
@@ -95,10 +94,9 @@
             transform: none;
         }
 
-        /* En altta sabit Bay Ali Ferhan imzası ve GitHub bağlantısı */
         #creator-footer {
             position: absolute;
-            bottom: 8px;
+            bottom: 10px;
             left: 0;
             width: 100%;
             text-align: center;
@@ -117,7 +115,6 @@
             text-shadow: 0 0 8px #ff0000;
         }
 
-        /* Jumpscare / Yanlış Cevap Ekranı */
         .overlay-screen {
             position: fixed;
             top: 0;
@@ -174,7 +171,6 @@
 
     <!-- OYUN / SORU EKRANI -->
     <div class="container hidden" id="game-screen">
-        <!-- En üstteki Geri Dön Tuşu -->
         <div style="text-align: left; margin-bottom: 10px;">
             <button onclick="playClickSound(); backToMenu();" style="font-size: 13px; padding: 6px 15px; margin: 0; animation: none;">◀ Geri Dön</button>
         </div>
@@ -238,8 +234,6 @@
         ];
 
         let currentQuestionIndex = 0;
-
-        // Web Audio API Ses Motoru
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playClickSound() {
